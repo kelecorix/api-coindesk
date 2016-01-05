@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Lib
     ( queryCD
     , getCurrentPrice
@@ -11,6 +13,8 @@ module Lib
 import Data.Aeson
 import Data.Time
 import Network.HTTP.Conduit (simpleHttp)
+import qualified Data.ByteString.Char8 as B
+import qualified Data.ByteString.Lazy.Char8 as BL
 
 import Types
 
@@ -42,5 +46,6 @@ getHistoryInPeriod sdate edate = getHistory ++ "?start="++"&end="
 -- | Execute defined query over CoindDesk API
 -- 
 queryCD :: String -> IO (Maybe BPIWrapper)
-queryCD query = fmap decode $ simpleHttp $ query 
-    
+queryCD query = fmap decode $ simpleHttp query
+
+

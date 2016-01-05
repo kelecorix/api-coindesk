@@ -1,5 +1,6 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DeriveAnyClass #-}
+{-# LANGUAGE DeriveGeneric   #-}
+{-# LANGUAGE DeriveAnyClass  #-}
+{-# LANGUAGE TemplateHaskell #-}
 
 module Types
        ( BPITime(..)
@@ -10,6 +11,7 @@ module Types
 
 import           Data.Aeson
 import           GHC.Generics
+import           Data.Aeson.TH
 
 --------------------------------------------------------------------------------
 
@@ -31,7 +33,15 @@ data BPI =
   BPI { usd :: BPICurrency
       , gbp :: BPICurrency
       , eur :: BPICurrency  
-    } deriving (Generic, FromJSON, Show)
+    } deriving (Show)
+
+$(deriveFromJSON defaultOptions {
+    fieldLabelModifier =
+       let f "usd" = "USD"
+           f "gbp" = "GBP"
+           f "eur" = "EUR"
+       in f
+    } ''BPI)
 
 -- | Bitcoing price index
 data BPIWrapper =
