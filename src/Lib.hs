@@ -1,9 +1,17 @@
 module Lib
     ( queryCD
+    , getCurrentPrice
+    , getCurrentPriceInCurrency
+    , getHistory
+    , getHistoryInCurrency
+    , getHistoryYesterday
+    , getHistoryInPeriod  
     ) where
 
 import Data.Aeson
 import Data.Time
+import Network.HTTP.Conduit (simpleHttp)
+
 import Types
 
 --------------------------------------------------------------------------------
@@ -33,8 +41,6 @@ getHistoryInPeriod sdate edate = getHistory ++ "?start="++"&end="
 
 -- | Execute defined query over CoindDesk API
 -- 
-queryCD :: IO ()
-queryCD = putStrLn "someFunc"
-
-parseBPI :: BPIWrapper
-parseBPI = undefined
+queryCD :: String -> IO (Maybe BPIWrapper)
+queryCD query = fmap decode $ simpleHttp $ query 
+    

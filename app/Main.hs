@@ -2,5 +2,10 @@ module Main where
 
 import Lib
 
+--------------------------------------------------------------------------------
+
 main :: IO ()
-main = queryCD
+main =
+  do
+    res <- queryCD getCurrentPrice
+    putStrLn $ show $ res
