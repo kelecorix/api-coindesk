@@ -2,7 +2,11 @@ module Lib
     ( queryCD
     ) where
 
+import Data.Aeson
 import Data.Time
+import Types
+
+--------------------------------------------------------------------------------
 
 endpoint = "http://api.coindesk.com/v1/bpi/"
 
@@ -31,3 +35,6 @@ getHistoryInPeriod sdate edate = getHistory ++ "?start="++"&end="
 -- 
 queryCD :: IO ()
 queryCD = putStrLn "someFunc"
+
+parseBPI :: BPIWrapper
+parseBPI = undefined
