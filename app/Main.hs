@@ -2,7 +2,13 @@
 
 module Main where
 
-import Lib
+import           Control.Concurrent (forkIO, threadDelay)
+import           Control.Concurrent.STM.TVar
+import           Control.Monad (forever)
+import           System.Environment
+import           Data.Time.Clock
+
+import           Lib
 
 --------------------------------------------------------------------------------
 
@@ -15,9 +21,28 @@ queryCDC query =
       Just bpiw ->
         do
           let currn = eur $ bpi bpiw
-          putStrLn $ updated $ time bpiw
-          putStrLn $ (rate currn) ++ " " ++ (code currn)
+              curr  = (rate currn) ++ " " ++ (code currn)
+              out   = (updated $ time bpiw) ++ " | " ++ curr
+          putStrLn $ out
+
+queryCDCDaemon :: TVar Int -> Int -> String -> IO ()
+queryCDCDaemon timeVar delay query =
+  forever $ daemonProcess timeVar
+    where
+      daemonProcess var =
+        do
+          queryCDC query
+          delayTime <- readTVarIO var
+          _         <- threadDelay delayTime
+          return ()
 
 main :: IO ()
-main = queryCDC getCurrentPrice
+main =
+  do
+    let delay = 30000 -- each 30 seconds 1/2 minute
+    a       <- getArgs
+    timeVar <- newTVarIO (delay*1000)
+    case a of
+      ["-d"]    -> queryCDCDaemon timeVar delay getCurrentPrice
+      otherwise -> queryCDC getCurrentPrice 
 

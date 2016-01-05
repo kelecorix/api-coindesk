@@ -32,6 +32,8 @@ executable cdsk
                      , bytestring
                      , http-conduit
                      , aeson
+                     , stm
+                     , time
                      , hs-coindesk-api
   default-language:    Haskell2010
 
