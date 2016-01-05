@@ -48,6 +48,6 @@ data BPIWrapper =
   BPIWrapper { time       :: BPITime 
              , disclaimer :: String
              , bpi        :: BPI
-             } deriving (Generic, FromJSON, Show)
+            } deriving (Generic, FromJSON, Show)
 
        

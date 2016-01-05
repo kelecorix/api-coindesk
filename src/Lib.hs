@@ -7,7 +7,8 @@ module Lib
     , getHistory
     , getHistoryInCurrency
     , getHistoryYesterday
-    , getHistoryInPeriod  
+    , getHistoryInPeriod
+    , module Types  
     ) where
 
 import Data.Aeson
@@ -47,5 +48,3 @@ getHistoryInPeriod sdate edate = getHistory ++ "?start="++"&end="
 -- 
 queryCD :: String -> IO (Maybe BPIWrapper)
 queryCD query = fmap decode $ simpleHttp query
-
-
