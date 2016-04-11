@@ -1,4 +1,4 @@
-name:                hs-coindesk-api
+name:                api-coindesk
 version:             0.1.0.0
 synopsis:            Initial project template from stack
 description:         Please see README.md
@@ -34,7 +34,7 @@ executable cdsk
                      , aeson
                      , stm
                      , time
-                     , hs-coindesk-api
+                     , api-coindesk
   default-language:    Haskell2010
 
 test-suite cdsk-test
