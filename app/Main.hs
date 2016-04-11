@@ -5,6 +5,7 @@ module Main where
 import           Control.Concurrent (forkIO, threadDelay)
 import           Control.Concurrent.STM.TVar
 import           Control.Monad (forever)
+import qualified Data.Text as T
 import           System.Environment
 import           Data.Time.Clock
 
@@ -12,7 +13,7 @@ import           Lib
 
 --------------------------------------------------------------------------------
 
-queryCDC :: String -> IO ()
+queryCDC :: T.Text -> IO ()
 queryCDC query =
   do
     res <- queryCD query
@@ -21,11 +22,11 @@ queryCDC query =
       Just bpiw ->
         do
           let currn = eur $ bpi bpiw
-              curr  = (rate currn) ++ " " ++ (code currn)
-              out   = (updated $ time bpiw) ++ " | " ++ curr
+              curr  = (T.unpack (rate currn)) ++ " " ++ (T.unpack (code currn))
+              out   = (T.unpack (updated $ time bpiw)) ++ " | " ++ curr
           putStrLn $ out
 
-queryCDCDaemon :: TVar Int -> Int -> String -> IO ()
+queryCDCDaemon :: TVar Int -> Int -> T.Text -> IO ()
 queryCDCDaemon timeVar delay query =
   forever $ daemonProcess timeVar
     where

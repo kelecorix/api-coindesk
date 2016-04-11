@@ -10,22 +10,23 @@ module Types
        where
 
 import           Data.Aeson
+import           Data.Text
 import           GHC.Generics
 import           Data.Aeson.TH
 
 --------------------------------------------------------------------------------
 
 data BPITime =
-  BPITime { updated    :: String -- UTC
-          , updatedISO :: String -- ISO
-          , updateduk  :: String -- GMT
+  BPITime { updated    :: Text -- UTC
+          , updatedISO :: Text -- ISO
+          , updateduk  :: Text -- GMT
           } deriving (Generic, FromJSON, Show)
 
 data BPICurrency =
-  BPICurrency { code        :: String
-              , symbol      :: String
-              , rate        :: String  
-              , description :: String
+  BPICurrency { code        :: Text
+              , symbol      :: Text
+              , rate        :: Text  
+              , description :: Text
               , rate_float  :: Float  
               } deriving (Generic, FromJSON, Show)
 
@@ -46,7 +47,7 @@ $(deriveFromJSON defaultOptions {
 -- | Bitcoing price index
 data BPIWrapper =
   BPIWrapper { time       :: BPITime 
-             , disclaimer :: String
+             , disclaimer :: Text
              , bpi        :: BPI
            } deriving (Generic, FromJSON, Show)
 
