@@ -7,7 +7,7 @@ Haskell binding for CoinDesk API  (BPI, Bitcoin Price Index) http://www.coindesk
 Just build repository with `stack build` and use following
 
 ```
-.stack-work/install/x86_64-linux/lts-3.14/7.10.2/bin/cdsk 
+stack exec -- cdsk 
 ```
 
 lsts and platfrom may vary, or simly `cdsk` if you use `stack install` command
