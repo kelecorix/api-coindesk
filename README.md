@@ -1,5 +1,6 @@
 # CoinDesk API 
-Haskell binding for CoinDesk API  (BPI, Bitcoin Price Index) http://www.coindesk.com/api/
+
+Haskell bindings for CoinDesk API / [BPI, Bitcoin Price Index] (http://www.coindesk.com/api/)
 
 `src` - contains actual API that can be used in 3rd part apps
 `app` - executable for CLI app that can be used to view current value or run continuosly
@@ -7,14 +8,16 @@ Haskell binding for CoinDesk API  (BPI, Bitcoin Price Index) http://www.coindesk
 Just build repository with `stack build` and use following
 
 ```
-stack exec -- cdsk 
+$ stack exec -- cdsk 
 ```
 
-lsts and platfrom may vary, or simly `cdsk` if you use `stack install` command
+or simply `cdsk` if you used `stack install` command
 
 ```
 $ cdsk 
 ```
+that will bring following output
+
 ```
 Apr 14, 2016 15:25:00 UTC | 377.0385 EUR
 ```
