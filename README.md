@@ -1,6 +1,6 @@
 # CoinDesk API 
 
-Haskell bindings for CoinDesk API / (BPI, Bitcoin Price Index)[http://www.coindesk.com/api/]
+Haskell bindings for CoinDesk API / [BPI, Bitcoin Price Index](http://www.coindesk.com/api/)
 
 `src` - contains actual API that can be used in 3rd part apps
 `app` - executable for CLI app that can be used to view current value or run continuosly
